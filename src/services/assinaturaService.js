@@ -3,7 +3,7 @@ import { db } from "../firebaseConnection";
 
 /**
  * 
- * @param {string} uid 
+ * @param {string} uid - ID do usuário
  * @param {object} dados - { nome, valor, categoria, dataRenovacao } 
  * 
  */
@@ -73,10 +73,19 @@ export function filtrarProximasRenovacoes(assinaturas) {
     );
 }
 
-export function calcularResumo(assinaturas) {
-    const total = assinaturas.reduce((acc, curr) => acc + Number(curr.valor), 0);
-    return {
-        totalAssinaturas: assinaturas.length,
-        valorTotal: total,
-    }
+export function calcularResumoPorAssinatura(assinaturas) {
+    const totais = {};
+    
+    assinaturas.forEach(a => {
+        const nome = a.nome.toLowerCase();
+        if (!totais[nome]) {
+            totais[nome] = {
+                nome: a.nome,
+                valorTotal: 0,
+            };
+        }
+        totais[nome].valorTotal += Number(a.valor);
+    });
+
+    return Object.values(totais);
 }
