@@ -20,8 +20,8 @@ const Home = ({ navigation }) => {
     <View style={styles.container}>
       <TotalGastos total={total} />
       <ProximasRenovacoes assinaturas={assinaturas} />
-      <Button title="Ver Lista Completa de Assinaturas" onPress={() => navigation.navigate('ListaAssinaturas')} />
-      <BotaoAdicionar onPress={() => navigation.navigate('NovaAssinatura')} />
+      <Button title="Ver Lista Completa de Assinaturas" onPress={() => navigation.navigate('Lista')} />
+      <BotaoAdicionar onPress={() => navigation.navigate('Adicionar')}  />
     </View>
   );
 };

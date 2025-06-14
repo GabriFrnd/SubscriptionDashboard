@@ -1,18 +1,11 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
-import Home from './src/screens/Home';
-
-const Stack = createNativeStackNavigator();
+import AppNavigator from './src/navigation/AppNavigator';
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={Home} />
-        {/* Adicione outras telas depois aqui se quiser */}
-      </Stack.Navigator>
+      <AppNavigator />
     </NavigationContainer>
   );
-};
+}
