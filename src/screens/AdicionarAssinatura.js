@@ -1,24 +1,24 @@
-import React, { useState } from 'react';
-import { 
-  View, 
-  Text, 
-  TextInput, 
-  StyleSheet, 
-  ScrollView,
-  TouchableOpacity,
-  Alert
-} from 'react-native';
+import React, { useState, useContext } from 'react';
+import { View, Text, TextInput, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native';
+
+import { criaAssinatura } from '../services/assinaturaService';
+import { AuthContext } from '../contexts/auth-contexto';
+
 import RNPickerSelect from 'react-native-picker-select';
 
 const AdicionarAssinatura = () => {
   const [nome, setNome] = useState('');
   const [valor, setValor] = useState('');
+
   const [dia, setDia] = useState('');
   const [mes, setMes] = useState('');
+
   const [ano, setAno] = useState('');
   const [categoria, setCategoria] = useState('');
 
-  const handleSave = () => {
+  const { uid } = useContext(AuthContext);
+
+  const handleSave = async () => {
     const currentDate = new Date();
     const inputDate = new Date(Number(ano), Number(mes) - 1, Number(dia));
 
@@ -68,7 +68,20 @@ const AdicionarAssinatura = () => {
       return;
     }
 
-    Alert.alert('Sucesso', 'Assinatura cadastrada com sucesso!');
+    try {
+      const dadosAssinatura = {
+        nome,
+        valor: Number(valor.replace(',', '.')),
+        categoria,
+        dataRenovacao: new Date(Number(ano), Number(mes) - 1, Number(dia))
+      };
+
+      await criaAssinatura(uid, dadosAssinatura); // Passa o UID do contexto
+      Alert.alert('Sucesso', 'Salvo com sucesso!');
+      // Limpa os campos...
+    } catch (error) {
+      Alert.alert('Erro', error.message);
+    }
   };
 
   return (
