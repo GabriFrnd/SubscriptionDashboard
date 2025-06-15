@@ -68,9 +68,8 @@ Crie na raiz do projeto (Mesmo local do App.js) um arquivo .env.
 Dentro deste arquivo cole a chave da api enviada por pdf na atividade nomeando ela como 
 
 ```bash
-$ FIREBASE_API_KEY="chave_exemplo"
+ FIREBASE_API_KEY="chave_exemplo"
 ```
-
 
 #### 4. Execute o Projeto
 
