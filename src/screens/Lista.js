@@ -1,4 +1,3 @@
-import React from 'react';
 import { useEffect, useState } from "react";
 import { FlatList, View, StyleSheet, Text, Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
@@ -60,8 +59,10 @@ const Lista = () => {
           <Text style={estilos.vazio}>Nenhuma assinatura cadastrada.</Text>
         }
       />
+    </View>
+  ); 
 
-
+};
 const estilos = StyleSheet.create({
   container: {
     flex: 1,
