@@ -60,7 +60,19 @@ $ npm install
 
 📌 **Nota:** O Android Studio é necessário para configurar o ambiente de desenvolvimento Android, incluindo emuladores e ferramentas de depuração. Certifique-se de configurar corretamente as variáveis de ambiente, como `ANDROID_HOME`.
 
-#### 3. Execute o Projeto
+#### 3. Conecte a chave
+
+Crie na raiz do projeto (Mesmo local do App.js) um arquivo .env.
+
+
+Dentro deste arquivo cole a chave da api enviada por pdf na atividade nomeando ela como 
+
+```bash
+$ FIREBASE_API_KEY="chave_exemplo"
+```
+
+
+#### 4. Execute o Projeto
 
 ▶️ Inicie o ambiente de desenvolvimento com o Expo:
 
@@ -78,7 +90,7 @@ $ npm run ios
 $ npm run web
 ```
 
-#### 4. Acesse o App
+#### 5. Acesse o App
 
 🌐 Após iniciar o servidor, use o QR Code exibido no terminal ou Expo Go para rodar o aplicativo em seu dispositivo móvel.
 
