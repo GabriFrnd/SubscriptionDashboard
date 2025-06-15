@@ -24,7 +24,7 @@ const Home = ({ navigation }) => {
     <View style={styles.container}>
       <TotalGastos total={total} />
       <ProximasRenovacoes assinaturas={assinaturas} />
-      <Button title="Ver Lista Completa de Assinaturas" onPress={() => navigation.navigate('Lista')} />
+      <Button title="Ver Lista Completa de Assinaturas" onPress={() => navigation.navigate('Assinaturas')} />
       <BotaoAdicionar onPress={() => navigation.navigate('Adicionar')} />
     </View>
   );
