@@ -4,5 +4,5 @@ export const formatarMoeda = (valor) => {
 
 export const formatarData = (dataString) => {
   const data = new Date(dataString);
-  return data.toLocaleDateString('pt-BR');
+  return data.toLocaleDateString('pt-BR', { timeZone: 'UTC' });
 };

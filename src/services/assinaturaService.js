@@ -85,9 +85,21 @@ export function filtrarProximasRenovacoes(assinaturas) {
   const daqui30Dias = new Date();
   daqui30Dias.setDate(hoje.getDate() + 30);
 
-  return assinaturas.filter(
+  const assinaturasNoPeriodo = assinaturas.filter(
     (a) => a.dataRenovacao >= hoje && a.dataRenovacao <= daqui30Dias
   );
+
+  const renovacoesUnicas = {};
+
+  assinaturasNoPeriodo.forEach((assinatura) => {
+    const nome = assinatura.nome.toLowerCase();
+
+    if (!renovacoesUnicas[nome] || assinatura.dataRenovacao < renovacoesUnicas[nome].dataRenovacao){
+        renovacoesUnicas[nome] = assinatura;
+    }
+  });
+  
+  return Object.values(renovacoesUnicas);
 }
 
 export function calcularResumoPorAssinatura(assinaturas) {

@@ -73,7 +73,7 @@ const AdicionarAssinatura = () => {
         nome,
         valor: Number(valor.replace(',', '.')),
         categoria,
-        dataRenovacao: new Date(Number(ano), Number(mes) - 1, Number(dia))
+        dataRenovacao: new Date(Date.UTC(Number(ano), Number(mes) - 1, Number(dia)))
       };
 
       await criaAssinatura(uid, dadosAssinatura); // Passa o UID do contexto

@@ -1,17 +1,19 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { View, TextInput, Button, StyleSheet, Text, Alert } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { editarAssinatura, adicionarAssinatura } from "../services/assinaturaService";
-
+import { atualizarAssinatura, adicionarAssinatura } from "../services/assinaturaService";
+import { AuthContext  } from "../contexts/auth-contexto";
 const EditarAssinatura = () => {
   const navigation = useNavigation();
   const route = useRoute();
   const { assinatura } = route.params || {};
 
+  const { uid } = useContext(AuthContext);
+
   const [nome, setNome] = useState(assinatura ? assinatura.nome : "");
   const [valor, setValor] = useState(assinatura ? String(assinatura.valor) : "");
   const [dataRenovacao, setDataRenovacao] = useState(
-    assinatura ? assinatura.dataRenovacao : ""
+    assinatura ? new Date(assinatura.dataRenovacao).toISOString().split('T')[0] : ""
   );
 
   const salvar = async () => {
@@ -22,15 +24,20 @@ const EditarAssinatura = () => {
 
     const dados = {
       nome,
-      valor: parseFloat(valor),
-      dataRenovacao,
+      valor: parseFloat(valor.replace(',', '.')),
+      categoria: assinatura.categoria,
+           dataRenovacao: new Date(Date.UTC(
+          new Date(dataRenovacao + "T00:00:00").getUTCFullYear(),
+          new Date(dataRenovacao + "T00:00:00").getUTCMonth(),
+          new Date(dataRenovacao + "T00:00:00").getUTCDate()
+      )),
     };
 
     try {
       if (assinatura) {
-        await editarAssinatura(assinatura.id, dados);
+        await atualizarAssinatura(uid, assinatura.id, dados);
       } else {
-        await adicionarAssinatura(dados);
+        await adicionarAssinatura(uid, dados);
       }
       navigation.goBack();
     } catch (error) {

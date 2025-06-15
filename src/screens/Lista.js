@@ -1,21 +1,24 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { FlatList, View, StyleSheet, Text, Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import ItemAssinatura from "../components/ItemAssinatura";
-import { buscarTodasAssinaturas, excluirAssinatura } from "../services/assinaturaService";
+import { observarAssinaturas, buscarTodasAssinaturas, deletarAssinatura } from "../services/assinaturaService";
+import { AuthContext } from '../contexts/auth-contexto';
 
 const Lista = () => {
   const navigation = useNavigation();
   const [assinaturas, setAssinaturas] = useState([]);
 
-  useEffect(() => {
-    carregarDados();
-  }, []);
+  const { uid } = useContext(AuthContext);
 
-  const carregarDados = async () => {
-    const dados = await buscarTodasAssinaturas();
-    setAssinaturas(dados);
-  };
+  useEffect(() => {
+    if (uid) {
+      const unsubscribe = observarAssinaturas(uid, (assinaturasRecebidas) => {
+        setAssinaturas(assinaturasRecebidas);
+      });
+      return () => unsubscribe();
+    }  
+  }, [uid]);
 
   const aoExcluir = (id) => {
     Alert.alert(
@@ -26,8 +29,7 @@ const Lista = () => {
         {
           text: "Excluir",
           onPress: async () => {
-            await excluirAssinatura(id);
-            carregarDados();
+            await deletarAssinatura(uid, id);
           },
           style: "destructive",
         },
@@ -38,8 +40,7 @@ const Lista = () => {
 
   const aoEditar = (assinatura) => {
     navigation.navigate("Editar", {
-      assinatura,
-      salvarEdicao: () => carregarDados(),
+      assinatura
     });
   };
 

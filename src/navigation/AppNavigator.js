@@ -5,6 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import Home from '../screens/Home.js'
 import Lista from '../screens/Lista.js'
+import EditarAssinatura from '../screens/EditarAssinatura.js';
 import AdicionarAssinatura from '../screens/AdicionarAssinatura.js'
 
 import { Ionicons } from '@expo/vector-icons'
@@ -30,8 +31,8 @@ const AppNavigator = () => {
             <Tabs.Screen name="Adicionar" component={AdicionarAssinatura}
                 options={{tabBarIcon: ({color, size}) => (<Ionicons name='pencil' size={size} color={color}/>)}}
             />
-            <Tabs.Screen name="Lista" component={Lista}
-                options={{tabBarIcon: ({color, size}) => (<Ionicons name='book-outline' size={size} color={color}/>)}}
+            <Tabs.Screen name="AssinaturasList" component={ListaStack}
+                options={{ title: 'Lista', headerShown: false, tabBarIcon: ({color, size}) => (<Ionicons name='book-outline' size={size} color={color}/>)}}
             />
         </Tabs.Navigator>
     )
