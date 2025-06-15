@@ -1,6 +1,11 @@
 import { addDoc, updateDoc, deleteDoc, getDoc, getDocs, collection, doc, onSnapshot } from 'firebase/firestore';
-import { db } from './firebaseConnection';
+import { db } from '../firebaseConnection';
 
+/**
+ * Cria uma nova assinatura para um usuário.
+ * @param {string} uid - ID do usuário
+ * @param {object} dados - { nome, valor, categoria, dataRenovacao }
+ */
 export async function criaAssinatura(uid, dados) {
   if (!dados.nome || !dados.categoria || !dados.valor || !dados.dataRenovacao) {
     throw new Error('Todos os campos são obrigatórios.');
