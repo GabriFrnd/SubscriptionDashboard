@@ -3,11 +3,11 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
-import { FIREBASE_API_KEY } from "../.env"; // Import the API_URL from environment variables
+// Import the API_URL from environment variables
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: FIREBASE_API_KEY, // This should be replaced with your actual API key
+  apiKey: "AIzaSyAiluEaw6eul7AhwA-dKiOkU2acBbvGiXw", // This should be replaced with your actual API key
   authDomain: "subscription-dashboard-e8762.firebaseapp.com",
   projectId: "subscription-dashboard-e8762",
   storageBucket: "subscription-dashboard-e8762.firebasestorage.app",
